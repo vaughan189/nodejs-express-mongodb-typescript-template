@@ -1,14 +1,13 @@
 /* eslint-disable require-jsdoc */
 import * as mongoose from 'mongoose';
 import { Request, Response } from 'express';
-import { ContactSchema } from '../models/Contact';
+import { ContactSchema } from '../models';
 
 const Contact = mongoose.model('Contact', ContactSchema);
 
 export class ContactController {
   public add(req: Request, res: Response): void {
     const newContact = new Contact(req.body);
-
     newContact.save((err, contact) => {
       if (err) {
         res.send(err);

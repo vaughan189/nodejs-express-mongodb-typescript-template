@@ -1,4 +1,4 @@
-import { ContactController } from '../controllers/Contact';
+import { ContactController } from '../controllers';
 import express from 'express';
 
 /* eslint-disable require-jsdoc */
