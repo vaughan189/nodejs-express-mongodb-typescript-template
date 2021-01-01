@@ -1,26 +1,23 @@
 /* eslint-disable require-jsdoc */
 import express, { Request, Response } from 'express';
-import { ContactController } from '../controllers/Contact';
+import { ContactsRoutes } from './Contact';
 
 export class Routes {
-  public contactController: ContactController = new ContactController();
+  public contactsRoutes: ContactsRoutes = new ContactsRoutes();
 
-  public routes(app: express.Application): void {
+  public initialize(app: express.Application): void {
     app.route('/').get((req: Request, res: Response) => {
       res.status(200).send({
-        message: 'API Working',
+        message: 'NodeJS Express MongoDB Typescript Template API Working',
       });
     });
 
-    app
-      .route('/contact')
-      .get(this.contactController.getContacts)
-      .post(this.contactController.addNewContact);
+    this.contactsRoutes.initialize(app);
 
-    app
-      .route('/contact/:contactId')
-      .get(this.contactController.getContactWithID)
-      .put(this.contactController.updateContact)
-      .delete(this.contactController.deleteContact);
+    app.route('*').get((req: Request, res: Response) => {
+      res.status(200).send({
+        message: 'Invalid Route / Route Does not exist',
+      });
+    });
   }
 }

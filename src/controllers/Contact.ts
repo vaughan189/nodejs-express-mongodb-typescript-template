@@ -6,7 +6,7 @@ import { ContactSchema } from '../models/Contact';
 const Contact = mongoose.model('Contact', ContactSchema);
 
 export class ContactController {
-  public addNewContact(req: Request, res: Response): void {
+  public add(req: Request, res: Response): void {
     const newContact = new Contact(req.body);
 
     newContact.save((err, contact) => {
@@ -17,7 +17,7 @@ export class ContactController {
     });
   }
 
-  public getContacts(req: Request, res: Response): void {
+  public getAll(req: Request, res: Response): void {
     Contact.find({}, (err, contact) => {
       if (err) {
         res.send(err);
@@ -26,7 +26,7 @@ export class ContactController {
     });
   }
 
-  public getContactWithID(req: Request, res: Response): void {
+  public getByID(req: Request, res: Response): void {
     Contact.findById(req.params.contactId, (err: any, contact: any) => {
       if (err) {
         res.send(err);
@@ -35,7 +35,7 @@ export class ContactController {
     });
   }
 
-  public updateContact(req: Request, res: Response): void {
+  public update(req: Request, res: Response): void {
     Contact.findOneAndUpdate(
       { _id: req.params.contactId },
       req.body,
@@ -49,7 +49,7 @@ export class ContactController {
     );
   }
 
-  public deleteContact(req: Request, res: Response): void {
+  public delete(req: Request, res: Response): void {
     Contact.remove({ _id: req.params.contactId }, (err) => {
       if (err) {
         res.send(err);
