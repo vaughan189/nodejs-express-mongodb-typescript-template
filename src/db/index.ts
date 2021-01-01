@@ -6,8 +6,8 @@ import mongoose from 'mongoose';
 class Database {
   public mongoUrl = configuration.DATABASE_URL || '';
 
-  public connect(): void {
-    mongoose.connect(this.mongoUrl, {
+  public async connect(): Promise<void> {
+    await mongoose.connect(this.mongoUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
